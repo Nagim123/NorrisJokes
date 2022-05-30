@@ -1,16 +1,30 @@
-# chuck_norris
+# Chuck Norris Jokes application project
 
-A new Flutter project.
+Flutter project for Chuck Norris Jokes application.
 
-## Getting Started
+## Application features
 
-This project is a starting point for a Flutter application.
+In this app you can:
 
-A few resources to get you started if this is your first Flutter project:
+- Read jokes about Chuck Norris.
+- Like jokes.
+- Swipe to the next joke.
+- Enjoy photos and pictures of Chuck Norris.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+All you need is just an internet connection!
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Demonstration:
+<p float="left">
+  <img src="./otherstuff/demonstration1.gif"/>
+  <img src="./otherstuff/demonstration2.gif"/>
+</p>
+
+## Modification
+Clone the repository and open it in Android Studio.
+```bash
+git clone https://github.com/Nagim123/NorrisJokes
+```
+
+## Android release
+
+You can try the app yourself on Android. Just download the APK file from [this link](https://github.com/Nagim123/NorrisJokes/releases/download/v1.0.0/ChuckNorrisJokes.apk).
