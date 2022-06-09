@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'norris_joke.g.dart';
 
 @JsonSerializable()
 class NorrisJoke {
+  int? imageIndex;
+
   @JsonKey(name: 'icon_url')
   final String iconUrl;
 

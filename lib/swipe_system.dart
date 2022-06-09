@@ -1,5 +1,7 @@
+import 'package:chuck_norris/norris_joke.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
+import 'joke_saver.dart';
 
 //Custom swiping widget
 class SwipingWidget extends StatefulWidget {
@@ -20,15 +22,17 @@ class SwipingWidget extends StatefulWidget {
 //The main switching widget. Will display appropriate widget depending on state of application.
 class _SwipingWidget extends State<SwipingWidget> {
   //List of widgets to display on stack
-  late List<Widget> cardList;
+  late List<JokeCard> cardList;
 
   //Controller for automatic swiping when like button pressed
   late AppinioSwiperController swiperController;
 
   //Every time card is removed, this method will be called
   void _onRemoveCard() {
+    final connectionErrorCard = NorrisJoke("", "-1", "", "Internet connection lost");
+    
     super.widget.onSwiped(
-        _addCard("Internet connection lost",
+        _addCard(connectionErrorCard,
             const AssetImage("assets/images/connection_lost.png")),
         this);
   }
@@ -41,8 +45,8 @@ class _SwipingWidget extends State<SwipingWidget> {
   }
 
   //Adds new card to swiping widget
-  JokeCard _addCard(String jokeText, ImageProvider image) {
-    JokeCard card = JokeCard(jokeText: jokeText, image: image);
+  JokeCard _addCard(NorrisJoke joke, ImageProvider image) {
+    JokeCard card = JokeCard(joke: joke, image: image);
     setState(() {
       cardList.insert(0, card);
     });
@@ -74,8 +78,10 @@ class _SwipingWidget extends State<SwipingWidget> {
               backgroundColor:
                   MaterialStateProperty.all<Color>(const Color(0xff4c4f56))),
           onPressed: () {
-            swiperController
-                .swipe(); //Automatic swipe of card, when button is pressed
+            //Save joke to disk
+            SaveJokeToDatabase(cardList.last.joke);
+            //Automatic swipe of card, when button is pressed
+            swiperController.swipe();
           },
           label: const Text(
             "Like",
@@ -93,13 +99,17 @@ class _SwipingWidget extends State<SwipingWidget> {
 
 //Widget that represents card
 class JokeCard extends StatelessWidget {
+
+  //Joke object
+  final NorrisJoke joke;
+
   //Text of a joke
   final String jokeText;
 
   //Image provider to load appropriate image
   final ImageProvider image;
 
-  const JokeCard({super.key, required this.jokeText, required this.image});
+  JokeCard({super.key, required this.joke, required this.image}) : jokeText = joke.value;
 
   @override
   Widget build(BuildContext context) {

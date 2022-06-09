@@ -1,14 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'swipe_system.dart';
-import 'api_interactions.dart';
+import 'package:chuck_norris/page_manager.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const NorrisApp());
 }
 
 //Main application widget
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class NorrisApp extends StatelessWidget {
+  const NorrisApp({Key? key}) : super(key: key);
 
   // This widget is the root of the application.
   @override
@@ -16,66 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chuck Norris Jokes',
       theme: ThemeData.dark(),
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              "Chuck Norris Jokes",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.black87,
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: FutureBuilder<List<String>>(
-                //Using future builder to show something to user, while loading first three jokes
-                future: loadThreeJokes(),
-                builder: (BuildContext buildContext,
-                    AsyncSnapshot<List<String>> snapshot) {
-                  if (snapshot.hasData) {
-                    return SwipingWidget(
-                      //My custom widget for swiping
-                      startingCards: [
-                        JokeCard(
-                            jokeText: snapshot.data![0],
-                            image: getRandomNorrisImage()),
-                        JokeCard(
-                            jokeText: snapshot.data![1],
-                            image: getRandomNorrisImage()),
-                        JokeCard(
-                            jokeText: snapshot.data![2],
-                            image: getRandomNorrisImage())
-                      ],
-                      onSwiped: (emptyCard, swipeSystem) {
-                        Future<String> jokeFromInternet = loadNorrisJoke();
-                        jokeFromInternet.then((value) {
-                          JokeCard newCard = JokeCard(
-                              jokeText: value, image: getRandomNorrisImage());
-                          swipeSystem.replace(emptyCard, newCard);
-                        });
-                      },
-                    );
-                  } else if (snapshot.hasError) {
-                    //If any error occurred, show error message
-                    return const Center(
-                      child: Text(
-                        "Unknown error (check internet connection)",
-                        style: TextStyle(color: Colors.white, fontSize: 23),
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: SizedBox(
-                        width: 70,
-                        height: 70,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ),
-          )),
+      home: FlexiblePages(),
     );
   }
 }

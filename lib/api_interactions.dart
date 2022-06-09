@@ -7,21 +7,22 @@ import 'dart:math';
 /*
   This file is responsible for all API interactions
  */
-//Loading one joke from Norris API by 'http'
-Future<String> loadNorrisJoke() async {
+///Loading one joke from Norris API by 'http'
+Future<NorrisJoke> loadNorrisJoke() async {
   final response =
       await http.get(Uri.parse('https://api.chucknorris.io/jokes/random'));
 
   if (response.statusCode == 200) {
     NorrisJoke joke = NorrisJoke.fromJson(jsonDecode(response.body));
-    return joke.value;
+    joke.imageIndex = Random().nextInt(10) + 1;
+    return joke;
   }
   throw Exception("Failed to load a joke!");
 }
 
-//Loads three jokes in a row
-Future<List<String>> loadThreeJokes() async {
-  List<String> jokes = [
+///Loads three jokes in a row
+Future<List<NorrisJoke>> loadThreeJokes() async {
+  List<NorrisJoke> jokes = [
     await loadNorrisJoke(),
     await loadNorrisJoke(),
     await loadNorrisJoke()
@@ -29,8 +30,12 @@ Future<List<String>> loadThreeJokes() async {
   return jokes;
 }
 
-//Gets a random picture of Chuck Norris from assets
+///Gets a random picture of Chuck Norris from assets
 ImageProvider getRandomNorrisImage() {
   int randInd = Random().nextInt(10) + 1;
   return AssetImage("assets/images/chuck$randInd.png");
+}
+
+ImageProvider getNorrisImageByIndex(int index) {
+  return AssetImage("assets/images/chuck$index.png");
 }
