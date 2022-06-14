@@ -10,6 +10,9 @@ In this app you can:
 - Like jokes.
 - Swipe to the next joke.
 - Enjoy photos and pictures of Chuck Norris.
+- Save favourite jokes to favourite joke's list.
+- Save jokes on your device or on firebase cloud.
+- Use search filters to find more specific jokes.
 
 All you need is just an internet connection!
 
