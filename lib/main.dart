@@ -49,8 +49,9 @@ class NoConnectionWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Chuck Norris Jokes',
       theme: ThemeData.dark(),
-      home: const Center(
-        child: Text("Internet connection error. Reload the app."),
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Chuck Norris Jokes"),),
+        body: const Center(child: Text("Connection error!", style: TextStyle(fontSize: 20),)),
       ),
     );
   }
