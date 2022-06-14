@@ -30,4 +30,4 @@ git clone https://github.com/Nagim123/NorrisJokes
 
 ## Android release
 
-You can try the app yourself on Android. Just download the APK file from [this link](https://github.com/Nagim123/NorrisJokes/releases/download/v1.0.0/ChuckNorrisJokes.apk).
+You can try the app yourself on Android. Just download the APK file from [this link](https://github.com/Nagim123/NorrisJokes/releases/download/v2.0.0/app-release.apk).
