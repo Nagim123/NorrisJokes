@@ -25,10 +25,10 @@ All you need is just an internet connection!
 
 ### Interface with features:
 <p float="left">
-  <img src="./otherstuff/screen1.png"/ width="100" height="200">
-  <img src="./otherstuff/screen2.png"/ width="100" height="200">
-  <img src="./otherstuff/screen3.png"/ width="100" height="200">
-  <img src="./otherstuff/screen4.png"/ width="100" height="200">
+  <img src="./otherstuff/screen1.png"/ width="300" height="500">
+  <img src="./otherstuff/screen2.png"/ width="300" height="500">
+  <img src="./otherstuff/screen3.png"/ width="300" height="500">
+  <img src="./otherstuff/screen4.png"/ width="300" height="500">
 </p>
 
 ## Modification
