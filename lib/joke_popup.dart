@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'swipe_system.dart';
 import 'norris_joke.dart';
 
+///Widget to show when user opens joke from favourites page
 class JokePopup extends StatelessWidget {
   final NorrisJoke joke;
 
@@ -11,7 +12,11 @@ class JokePopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Chuck Norris Jokes", style: const TextStyle(color: Colors.white),)),
+      appBar: AppBar(
+          title: const Text(
+        "Chuck Norris Jokes",
+        style: TextStyle(color: Colors.white),
+      )),
       body: Center(
         child: JokeCard(
           joke: joke,
@@ -20,5 +25,4 @@ class JokePopup extends StatelessWidget {
       ),
     );
   }
-
 }

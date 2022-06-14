@@ -29,8 +29,9 @@ class _SwipingWidget extends State<SwipingWidget> {
 
   //Every time card is removed, this method will be called
   void _onRemoveCard() {
-    final connectionErrorCard = NorrisJoke("", "-1", "", "Internet connection lost");
-    
+    final connectionErrorCard =
+        NorrisJoke("", "-1", "", "Internet connection lost");
+
     super.widget.onSwiped(
         _addCard(connectionErrorCard,
             const AssetImage("assets/images/connection_lost.png")),
@@ -73,13 +74,15 @@ class _SwipingWidget extends State<SwipingWidget> {
           },
         )),
         ElevatedButton.icon(
-          //Like button (task requirement)
+          //Like button
           style: ButtonStyle(
               backgroundColor:
                   MaterialStateProperty.all<Color>(const Color(0xff4c4f56))),
           onPressed: () {
             //Save joke to disk
-            SaveJokeToDatabase(cardList.last.joke);
+            if (cardList.last.joke.imageIndex != null) {
+              saveJoke(cardList.last.joke);
+            }
             //Automatic swipe of card, when button is pressed
             swiperController.swipe();
           },
@@ -99,7 +102,6 @@ class _SwipingWidget extends State<SwipingWidget> {
 
 //Widget that represents card
 class JokeCard extends StatelessWidget {
-
   //Joke object
   final NorrisJoke joke;
 
@@ -109,7 +111,8 @@ class JokeCard extends StatelessWidget {
   //Image provider to load appropriate image
   final ImageProvider image;
 
-  JokeCard({super.key, required this.joke, required this.image}) : jokeText = joke.value;
+  JokeCard({super.key, required this.joke, required this.image})
+      : jokeText = joke.value;
 
   @override
   Widget build(BuildContext context) {

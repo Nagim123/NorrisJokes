@@ -1,10 +1,13 @@
+import 'package:chuck_norris/filter.dart';
 import 'package:chuck_norris/norris_joke.dart';
 import 'package:flutter/material.dart';
 import 'swipe_system.dart';
 import 'api_interactions.dart';
 
-
+///Main page is widget that renders swiping system with jokes, uses future builder
 class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -12,7 +15,7 @@ class MainPage extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: FutureBuilder<List<NorrisJoke>>(
           //Using future builder to show something to user, while loading first three jokes
-          future: loadThreeJokes(),
+          future: loadThreeJokesByCategory(filteredCategories),
           builder: (BuildContext buildContext,
               AsyncSnapshot<List<NorrisJoke>> snapshot) {
             if (snapshot.hasData) {
@@ -21,19 +24,24 @@ class MainPage extends StatelessWidget {
                 startingCards: [
                   JokeCard(
                       joke: snapshot.data![0],
-                      image: getNorrisImageByIndex(snapshot.data![0].imageIndex!)),
+                      image:
+                          getNorrisImageByIndex(snapshot.data![0].imageIndex!)),
                   JokeCard(
                       joke: snapshot.data![1],
-                      image: getNorrisImageByIndex(snapshot.data![1].imageIndex!)),
+                      image:
+                          getNorrisImageByIndex(snapshot.data![1].imageIndex!)),
                   JokeCard(
                       joke: snapshot.data![2],
-                      image: getNorrisImageByIndex(snapshot.data![2].imageIndex!))
+                      image:
+                          getNorrisImageByIndex(snapshot.data![2].imageIndex!))
                 ],
                 onSwiped: (emptyCard, swipeSystem) {
-                  Future<NorrisJoke> jokeFromInternet = loadNorrisJoke();
+                  Future<NorrisJoke> jokeFromInternet =
+                      loadNorrisJokeByCategory(filteredCategories);
                   jokeFromInternet.then((value) {
                     JokeCard newCard = JokeCard(
-                        joke: value, image: getNorrisImageByIndex(value.imageIndex!));
+                        joke: value,
+                        image: getNorrisImageByIndex(value.imageIndex!));
                     swipeSystem.replace(emptyCard, newCard);
                   });
                 },
