@@ -22,6 +22,13 @@ All you need is just an internet connection!
   <img src="./otherstuff/demonstration2.gif"/>
 </p>
 
+
+### Interface with features:
+<p float="left">
+  <img src="./otherstuff/demonstration1.gif"/>
+  <img src="./otherstuff/demonstration2.gif"/>
+</p>
+
 ## Modification
 Clone the repository and open it in Android Studio.
 ```bash
