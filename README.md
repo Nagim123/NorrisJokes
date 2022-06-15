@@ -31,7 +31,7 @@ All you need is just an internet connection!
   <img src="./otherstuff/screen4.png"/ width="300" height="550">
 </p>
 
-Also if you want to uncheck all options except one in filter just a do long press on this option.
+Also if you want to uncheck all options except one in filter just do a long press on this option.
 
 ## Modification
 Clone the repository and open it in Android Studio.
